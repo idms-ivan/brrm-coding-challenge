@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "f875bd2f-526a-43a7-8f90-8ce8106d1aac",
+		"name": "Brrm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22526961",
+		"_collection_link": "https://www.postman.com/planetary-shadow-853800/workspace/brrm-coding-challenge/collection/22526961-f875bd2f-526a-43a7-8f90-8ce8106d1aac?action=share&source=collection_link&creator=22526961"
+	},
+	"item": [
+		{
+			"name": "Agent",
+			"item": [
+				{
+					"name": "Create agent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Agent 00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/agent",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"agent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get agents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/agent",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"agent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get agent by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/agent/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"agent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Issue",
+			"item": [
+				{
+					"name": "Create issue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Account problem\",\r\n    \"description\": \"Cant login\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/issue",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"issue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resolve issue",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/issue/resolve/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"issue",
+								"resolve",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -2,13 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { establishDatabaseConnection } = require("./database");
 const { attachRoutes } = require("./routes/attachRoutes");
+const config = require("./config/serverConfig");
 
 const initializeExpress = () => {
   const app = express();
 
   app.use(bodyParser.json({ limit: "10mb" }));
 
-  const port = 3000;
+  const port = config.port;
 
   attachRoutes(app);
 
