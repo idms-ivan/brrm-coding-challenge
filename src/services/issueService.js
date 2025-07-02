@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const { models } = require("../database");
+const { models, sequelize } = require("../database");
 const { issueStatus } = require("../constants/issueStatus");
 
 module.exports.createIssue = async (issue) => {
@@ -11,24 +11,33 @@ module.exports.createIssue = async (issue) => {
     },
   });
 
-  const newIssue = await Issue.create(issue);
+  const t = await sequelize.transaction();
 
-  if (!_.isNull(availableAgent)) {
-    await newIssue.setAgent(availableAgent);
-    newIssue.set({
-      status: issueStatus.ASSIGNED,
-    });
+  try {
+    const newIssue = await Issue.create(issue, { transaction: t });
 
-    await newIssue.save();
+    if (!_.isNull(availableAgent)) {
+      await newIssue.setAgent(availableAgent, { transaction: t });
+      newIssue.set({
+        status: issueStatus.ASSIGNED,
+      });
 
-    availableAgent.set({
-      available: false,
-    });
+      await newIssue.save({ transaction: t });
 
-    await availableAgent.save();
+      availableAgent.set({
+        available: false,
+      });
+
+      await availableAgent.save({ transaction: t });
+    }
+
+    await t.commit();
+
+    return newIssue;
+  } catch (error) {
+    await t.rollback();
+    throw error;
   }
-
-  return newIssue;
 };
 
 module.exports.resolveIssue = async (id) => {
