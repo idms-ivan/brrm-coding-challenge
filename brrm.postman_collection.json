@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Agent 00\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Agent 01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -112,7 +112,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/issue/resolve/4",
+							"raw": "{{host}}/api/issue/resolve/2",
 							"host": [
 								"{{host}}"
 							],
@@ -120,7 +120,25 @@
 								"api",
 								"issue",
 								"resolve",
-								"4"
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all issues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/issue",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"issue"
 							]
 						}
 					},
