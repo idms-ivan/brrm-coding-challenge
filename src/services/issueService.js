@@ -52,9 +52,17 @@ module.exports.resolveIssue = async (id) => {
 };
 
 module.exports.assignExistingIssue = async (agentId) => {
+  if (!agentId) {
+    return;
+  }
+
   const { Agent, Issue } = models;
 
   const agent = await Agent.findByPk(agentId);
+
+  if (!agent) {
+    return;
+  }
 
   const issue = await Issue.findOne({
     where: {
@@ -64,6 +72,13 @@ module.exports.assignExistingIssue = async (agentId) => {
 
   if (!_.isNull(issue)) {
     await issue.setAgent(agent);
+
+    issue.set({
+      status: issueStatus.ASSIGNED,
+    });
+
+    await issue.save();
+
     agent.set({
       available: false,
     });
@@ -74,4 +89,18 @@ module.exports.assignExistingIssue = async (agentId) => {
   }
 
   await agent.save();
+};
+
+module.exports.getAllIssues = async () => {
+  const { Agent, Issue } = models;
+
+  const issues = await Issue.findAll({
+    include: [
+      {
+        model: Agent,
+      },
+    ],
+  });
+
+  return issues;
 };

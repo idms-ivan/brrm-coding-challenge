@@ -1,7 +1,7 @@
 const _ = require("lodash");
 const IssueService = require("../services/issueService");
 
-module.exports.CreateIssue = async (req, res) => {
+module.exports.createIssue = async (req, res) => {
   const issue = await IssueService.createIssue(req.body);
 
   return res.status(200).json({
@@ -26,5 +26,15 @@ module.exports.resolveIssue = async (req, res) => {
     success: true,
     message: `Resolved issue with ID: ${id}`,
     data: resolvedIssue,
+  });
+};
+
+module.exports.getAllIssues = async (req, res) => {
+  const issues = await IssueService.getAllIssues();
+
+  return res.status(200).json({
+    success: true,
+    message: `All issues`,
+    data: issues,
   });
 };

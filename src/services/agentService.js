@@ -1,7 +1,7 @@
 const _ = require("lodash");
 const { models } = require("../database");
 
-module.exports.CreateAgent = async (agentDto) => {
+module.exports.createAgent = async (agentDto) => {
   const { Agent } = models;
 
   const agent = await Agent.create(agentDto);
@@ -9,7 +9,7 @@ module.exports.CreateAgent = async (agentDto) => {
   return agent;
 };
 
-module.exports.GetAllAgents = async () => {
+module.exports.getAllAgents = async () => {
   const { Agent } = models;
 
   const agents = await Agent.findAll();
@@ -17,7 +17,7 @@ module.exports.GetAllAgents = async () => {
   return agents;
 };
 
-module.exports.GetOneAgent = async (id) => {
+module.exports.getOneAgent = async (id) => {
   const { Agent } = models;
 
   const agent = await Agent.findByPk(id);
